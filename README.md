@@ -54,7 +54,7 @@ INSERT OVERWRITE LOCAL DIRECTORY '/Users/rashmi/output' ROW FORMAT DELIMITED FIE
 
 <ol>
 7. Copy HiveQL output from local FS toHDFS
-</ol>ol>
+</ol>
 ```
 $ hadoop fs -put /Users/rashmi/output /user/rashmi/dowjones/output
 ```

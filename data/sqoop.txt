@@ -1,0 +1,5 @@
+# Sqoop command to import/export dowjones data into HDFS
+
+sqoop import --connect jdbc:mysql://localhost/dowjones --table dowjones --target-dir /user/rashmi/dowjones --username root --split-by quarter
+
+sqoop export --connect jdbc:mysql://localhost/dowjones --table quarter_stock_volumes --export-dir /Users/rashmi/output --username root --input-fields-terminated-by ',' --input-lines-terminated-by '\n'

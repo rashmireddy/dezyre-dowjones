@@ -50,6 +50,11 @@ $hive > CREATE EXTERNAL TABLE DOWJONES(quarter INT, stock STRING, dj_date DATE, 
 </ol>
 ```
 INSERT OVERWRITE LOCAL DIRECTORY '/Users/rashmi/output' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' select quarter, stock, SUM(volume) from dowjones GROUP BY quarter, stock;
+
+
+NOTE: you can also write MR program which does the same as above HiveQL. Source code & MR output is updated in the same project.
+$ mvn compile
+$ hadoop jar target/dezyre-dowjones-1.0-SNAPSHOT.jar com.rashmi.mapreduce.dowjones.DowJonesJob /user/rashmi/dezyre-dowjones/ /user/rashmi/dezyre-dowjones/tickercount
 ```
 
 <ol>
@@ -66,3 +71,4 @@ Export MapReduce output into MySQL
 ```
 $ sqoop export --connect jdbc:mysql://localhost/dowjones --table quarter_stock_volumes --export-dir /user/rashmi/dowjones/output --username root --input-fields-terminated-by '\t' --input-lines-terminated-by '\n'
 ```
+

@@ -59,6 +59,7 @@ $ hadoop jar target/dezyre-dowjones-1.0-SNAPSHOT.jar com.rashmi.mapreduce.dowjon
 
 <ol>
 7. Copy HiveQL output from local FS toHDFS
+Note: https://issues.apache.org/jira/browse/HIVE-5672. because of this bug we are not able to output the result of select query in step 6 to HDFS directory. This hadoop put command is necessary since scoop cannot export local directory to MySQL
 </ol>
 ```
 $ hadoop fs -put /Users/rashmi/output /user/rashmi/dowjones/output

@@ -54,7 +54,7 @@ INSERT OVERWRITE LOCAL DIRECTORY '/Users/rashmi/output' ROW FORMAT DELIMITED FIE
 
 NOTE: you can also write MR program which does the same as above HiveQL. Source code & MR output is updated in the same project.
 $ mvn compile
-$ hadoop jar target/dezyre-dowjones-1.0-SNAPSHOT.jar com.rashmi.mapreduce.dowjones.DowJonesJob /user/rashmi/dezyre-dowjones/ /user/rashmi/dezyre-dowjones/tickercount
+$ hadoop jar target/dezyre-dowjones-1.0-SNAPSHOT.jar com.rashmi.mapreduce.dowjones.DowJonesJob /user/rashmi/dowjones /user/rashmi/dowjones/mapreduce_output
 ```
 
 <ol>

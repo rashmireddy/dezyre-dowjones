@@ -1,0 +1,3 @@
+use dowjones;
+CREATE EXTERNAL TABLE DOWJONES(quarter INT, stock STRING, dj_date DATE, open DOUBLE, high DOUBLE, low DOUBLE, close DOUBLE, volume BIGINT, percent_change_price DOUBLE, percent_change_volume_over_last_wk DOUBLE, previous_weeks_volume DOUBLE, next_weeks_open DOUBLE, next_weeks_close DOUBLE, percent_change_next_weeks_price DOUBLE, days_to_next_dividend DOUBLE, percent_return_next_dividend DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' STORED AS TEXTFILE LOCATION '/user/rashmi/dowjones';
+INSERT OVERWRITE LOCAL DIRECTORY '/Users/rashmi/output' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' select quarter, stock, SUM(volume) from dowjones GROUP BY quarter, stock;

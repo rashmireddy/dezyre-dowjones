@@ -10,9 +10,9 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class DowJonesReducer extends Reducer<Text, Text, NullWritable, Text> {
+public class DowJonesReducer extends Reducer<Text, DowJonesDataWritable, NullWritable, Text> {
 		
-	public void reduce(Text reducerKey, Iterable<Text> reducerValues, Context context) 
+	public void reduce(Text reducerKey, Iterable<DowJonesDataWritable> reducerValues, Context context) 
 		throws IOException, InterruptedException {
 
 		int Total = 0;
@@ -20,17 +20,19 @@ public class DowJonesReducer extends Reducer<Text, Text, NullWritable, Text> {
 		//String outputKey = null;
 		//String outputValue = null;
 		
-		Map<Integer,ArrayList<Double>> qCountList = new HashMap<Integer,ArrayList<Double>>();
 		Map<Integer,Double> qCount = new HashMap<Integer,Double>();
 		
 		//foreach Key(stock_symbol) sum the volume in each quarter
-		for( Text value : reducerValues) {
-			String parts[] = value.toString().split(":");
-			if(parts.length != 2) 
-				continue;
+		for( DowJonesDataWritable value : reducerValues) {
+			//String parts[] = value.toString().split(":");
+			//if(parts.length != 2) 
+			//	continue;
 			
-			int quarter = Integer.parseInt(parts[0]);
-			double volume = Double.parseDouble(parts[1]);
+			String quarterText = value.getQuater().toString();
+			String volumeText  = value.getVolume().toString();
+
+			int quarter = Integer.parseInt(quarterText);
+			double volume = Double.parseDouble(volumeText);
 			
 			if(qCount.containsKey(quarter)) {
 				qCount.put(quarter, qCount.get(quarter)+ volume);

@@ -5,7 +5,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class DowJonesMapper extends Mapper<LongWritable, Text, Text, Text>{
+public class DowJonesMapper extends Mapper<LongWritable, Text, Text, DowJonesDataWritable>{
 		
 	@Override
 	public void map(LongWritable key, Text value, Context context) 
@@ -19,9 +19,9 @@ public class DowJonesMapper extends Mapper<LongWritable, Text, Text, Text>{
 		// String mapperValue = "quarter:" + parts[0] + ":volume:" + parts[7];
 		// sending quarter : volume as the mapper value
 		String mapperValue = parts[0] + ":" + parts[7];
-		
+		DowJonesDataWritable dowJonesData = new DowJonesDataWritable(parts[0], parts[7]);
 		//Key = stock_symbol, Value = quarter:<which_quarter>:volume:<volume_num>
 		//which_quarter = 1,2,3,4
-		context.write(new Text(parts[1]), new Text(mapperValue));
+		context.write(new Text(parts[1]), dowJonesData);
 	}
 }

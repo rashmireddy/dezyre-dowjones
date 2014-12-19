@@ -26,7 +26,8 @@ public class DowJonesJob extends Configured implements Tool {
 		Configuration conf = new Configuration();
 		
 		// Create a new JobConf using the processed conf
-		Job job = new Job(conf,"dowJonesJob");
+		//Job job = new Job(conf,"dowJonesJob");
+		Job job = Job.getInstance(conf,"dowJonesJob");
 		job.setJarByClass(DowJonesJob.class);
 		
 		//job.setNumReduceTasks(3);
@@ -37,7 +38,7 @@ public class DowJonesJob extends Configured implements Tool {
 		
 		//Specify Mapper output key & value class
 		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(Text.class);
+		job.setMapOutputValueClass(DowJonesDataWritable.class);
 	    
 	    // job specific, which defaults to Mapper's output key/value
 	    job.setOutputKeyClass(Text.class);
